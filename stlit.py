@@ -21,11 +21,11 @@ from pathlib import Path
 import tempfile
 
 
-file = st.file_uploader("选择待上传的xlsx文件", type=['xlsx'])
+file = st.file_uploader("选择待上传的xlsx文件", accept_multiple_files = False, type=["xlsx","xls"])
 if st.button("点击"):
-    if file is not None:
-        data = pd.read_excel(file.read())
-        st.dataframe(data)
+    if uploaded_file is not None:
+        df = pd.read_excel(uploaded_file.read())
+        st.dataframe(df)
         
 
 
