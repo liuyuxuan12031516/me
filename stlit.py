@@ -14,8 +14,8 @@ from matplotlib import pyplot as plt
 from scipy.fftpack import dct
 from scipy.fft import fft
 
-st.set_page_config(page_title="言语语音可视化",page_icon=":rainbow:",layout="wide",initial_sidebar_state="auto")
-    st.title('言语语音可视化平台:heart:')
+st.set_page_config(page_title="七里香还是稻香",page_icon=":rainbow:",layout="wide",initial_sidebar_state="auto")
+    st.title('七里香还是稻香:heart:')
     st.markdown('<br>',unsafe_allow_html=True)
     st.markdown('<br>',unsafe_allow_html=True)
     charts_mapping={
@@ -38,7 +38,7 @@ if st.session_state.first_visit:
 	st.write('Alarm is set for', st.session_state.date_time)
     
 
-st.title('言语语音可视化平台')
+# st.title('言语语音可视化平台')
 
 import streamlit as st
 import base64
