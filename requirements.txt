@@ -4,3 +4,4 @@ python_speech_features
 matplotlib
 scipy
 openpyxl
+librosa
