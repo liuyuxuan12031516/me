@@ -34,7 +34,8 @@ if st.session_state.first_visit:
 #     	st.session_state.my_random=MyRandom(random.randint(1,1000000))
 	#     st.session_state.city_mapping,st.session_state.random_city_index=get_city_mapping()
 	#     # st.session_state.random_city_index=random.choice(range(len(st.session_state.city_mapping)))
-   	st.balloons()  #第一次访问时才会放气球
+   	st.balloons()
+        st.snow()
 	st.write('Alarm is set for', st.session_state.date_time)
     
 
