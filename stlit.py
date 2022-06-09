@@ -15,22 +15,22 @@ from scipy.fft import fft
 
 st.title('言语语音可视化平台')
 
-uploaded_file1 = st.file_uploader("Choose a CSV file", type="wav")
-uploaded_file2 = st.file_uploader("Choose a CSV file", type="wav")
+uploaded_file1 = st.file_uploader("Choose a WAV file", type="wav")
+uploaded_file2 = st.file_uploader("Choose a WAV file", type="wav")
 
-if uploaded_file is not None:
-    data = pd.read_csv(uploaded_file)
-    st.write(data)
+if uploaded_file1 is not None:
+    sample_rate,signal=scipy.io.wavfile.read(uploaded_file)
 
 # file = st.sidebar.selectbox(
 #         'file',
 #         ['D:/桌面/CGZ-speaker1-a-T1.wav','D:/桌面/ZQ-speaker1-a-T4.wav'])
-'file:',file
+
+'file:',uploaded_file1
 option = st.sidebar.selectbox(
         'option',
         ['time domain','mfcc','frequency domain'])
 'option:', option
-sample_rate,signal=scipy.io.wavfile.read(uploaded_file)
+
 if option == 'time domain':
     fig1 = plt.figure()
     plt.plot(signal)
