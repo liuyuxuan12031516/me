@@ -21,17 +21,13 @@ from pathlib import Path
 import tempfile
 
 
-file = st.file_uploader("选择待上传的PDF文件", type=['pdf'])
+file = st.file_uploader("选择待上传的csv文件", type=['csv'])
 if st.button("点击"):
     if file is not None:
-        with tempfile.NamedTemporaryFile(delete=False) as tmp_file:
-            fp = Path(tmp_file.name)
-            fp.write_bytes(file.getvalue())
-            with open(tmp_file.name, "rb") as f:
-                base64_pdf = base64.b64encode(f.read()).decode('utf-8')
-            pdf_display = f'<embed src="data:application/pdf;base64,{base64_pdf}" ' \
-                          f'width="800" height="1000" type="application/pdf">'
-            st.markdown(pdf_display, unsafe_allow_html=True)
+        data = pd.read_csv(file.read())
+        st.dataframe(data)
+        
+
 
 # uploaded_file1 = st.file_uploader("Choose a WAV file", type="wav")
 # uploaded_file2 = st.file_uploader("Choose a WAV file", type="wav")
