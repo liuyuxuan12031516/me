@@ -40,7 +40,9 @@ if st.button("点击"):
         st.dataframe(df)
 	
 img = st.file_uploader("选择待上传的图片", accept_multiple_files = False, type=["gif"])
-streamlit.image(img, caption=None, width=None, use_column_width=False, clamp=False)
+if st.button("点击"):
+    if uploaded_file is not None:
+	st.image(img, caption=None, width=None, use_column_width=False, clamp=False)
         
 
 
