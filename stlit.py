@@ -14,8 +14,8 @@ from matplotlib import pyplot as plt
 from scipy.fftpack import dct
 from scipy.fft import fft
 
-st.set_page_config(page_title="七里香还是稻香",page_icon=":rainbow:",layout="wide",initial_sidebar_state="auto")
-st.title('七里香还是稻香:heart:')
+st.set_page_config(page_title="言语语音可视化平台",page_icon=":rainbow:",layout="wide",initial_sidebar_state="auto")
+st.title('言语语音可视化平台:heart:')
 st.markdown('<br>',unsafe_allow_html=True)
 st.markdown('<br>',unsafe_allow_html=True)
 charts_mapping={
@@ -30,8 +30,8 @@ else:
 if st.session_state.first_visit:
 	'''在这里可以定义任意多个全局变量，方便程序进行调用'''
 	st.session_state.date_time=datetime.datetime.now() + datetime.timedelta(hours=8) #Streamlit Cloud的时区是UTC，加8小时即北京时间
-    	st.session_state.random_chart_index=random.choice(range(len(charts_mapping)))
-    	st.session_state.my_random=MyRandom(random.randint(1,1000000))
+#     	st.session_state.random_chart_index=random.choice(range(len(charts_mapping)))
+#     	st.session_state.my_random=MyRandom(random.randint(1,1000000))
 	#     st.session_state.city_mapping,st.session_state.random_city_index=get_city_mapping()
 	#     # st.session_state.random_city_index=random.choice(range(len(st.session_state.city_mapping)))
    	st.balloons()  #第一次访问时才会放气球
