@@ -39,48 +39,76 @@ uploaded_file = st.file_uploader("选择待上传的文件", accept_multiple_fil
 
 
 if uploaded_file is not None:
-    if st.button("讀取數據"):
+    if option == 'wav':
+
         st.write(uploaded_file.type)
-        # df = pd.read_excel(uploaded_file.read())
         sample_rate, signal = scipy.io.wavfile.read(uploaded_file)
-        # st.dataframe(df)
+
 
         'file:', uploaded_file
-        option = st.selectbox(
+        option2 = st.selectbox(
             'option',
-            ['time domain', 'mfcc', 'frequency domain'])
-        'option:', option
+            ['time domain', 'mfcc', 'frequency domain','specgram'])
+        'option:', option2
 
-        if option == 'time domain':
-            fig1 = plt.figure()
+        if option2 == 'time domain':
+            fig1 = plt.figure(figsize=(18, 8))
             plt.plot(signal)
-            plt.title(option)
+            plt.title(option2)
             st.pyplot(fig1)
 
-        elif option == 'mfcc':
+        elif option2 == 'mfcc':
             feature_mfcc = mfcc(signal, samplerate=sample_rate, nfft=1103, winfunc=np.hamming)
-            fig2 = plt.figure()
+            fig2 = plt.figure(figsize=(18, 8))
             mfcc_data = np.swapaxes(feature_mfcc, 0, 1)
             plt.imshow(mfcc_data, interpolation='nearest', cmap=cm.coolwarm, origin='lower')
-            plt.title(option)
+            plt.title(option2)
             st.pyplot(fig2)
 
-        else:
-            fig3 = plt.figure()
-            x, sr = librosa.load(uploaded_file, sr=16000)
+        elif option2 == 'frequency domain':
+            fig3 = plt.figure(figsize=(18, 8))
+            x, sr = signal, sample_rate
             print(len(x))
             ft = fft(x)
             print(len(ft), type(ft), np.max(ft), np.min(ft))
             magnitude = np.absolute(ft)  # 对fft的结果直接取模（取绝对值），得到幅度magnitude
             frequency = np.linspace(0, sr, len(magnitude))  # (0, 16000, 121632)
             # plot spectrum，限定[:40000]
-            # plt.figure(figsize=(18, 8))
-            plt.plot(frequency[:40000], magnitude[:40000])  # magnitude spectrum
+            # plt.figure()
+            plt.plot(frequency, magnitude)  # magnitude spectrum
             plt.title(option)
             plt.xlabel("Hz")
             plt.ylabel("Magnitude")
             st.pyplot(fig3)
 
+        elif option2 == 'specgram':
+            fig3 = plt.figure(figsize=(18, 8))
+            framelength = 0.025
+            fs = sample_rate
+            # NFFT点数=0.025*fs
+            framesize = int(framelength * fs)
+            print("NFFT:", framesize)
+            plt.specgram(signal, NFFT=framesize, Fs=fs, window=np.hanning(M=framesize))
+            plt.ylabel('Frequency')
+            plt.xlabel('Time(s)')
+            plt.title('Spectrogram')
+            st.pyplot(fig3)
+
+            # fftdata = np.fft.fft(waveData[0, :])
+            # fftdata = abs(fftdata)
+            # hz_axis = np.arange(0, len(fftdata))
+            # plt.figure()
+            # plt.plot(hz_axis, fftdata, c='b')
+            # plt.xlabel('hz')
+            # plt.ylabel('am')
+            # plt.show()
+
+
+
+
+    else:
+        df = pd.read_excel(uploaded_file.read())
+        st.dataframe(df)
 
 # uploaded_file1 = st.file_uploader("Choose a WAV file", type="wav")
 # uploaded_file2 = st.file_uploader("Choose a WAV file", type="wav")
@@ -91,4 +119,3 @@ if uploaded_file is not None:
 # # file = st.sidebar.selectbox(
 # #         'file',
 # #         ['D:/桌面/CGZ-speaker1-a-T1.wav','D:/桌面/ZQ-speaker1-a-T4.wav'])
-
