@@ -30,7 +30,7 @@ else:
 if st.session_state.first_visit:
 	st.session_state.date_time=datetime.datetime.now() + datetime.timedelta(hours=8) #Streamlit Cloud的时区是UTC，加8小时即北京时间
 	st.balloons()
-	st.write('Start time:',st.session.date_time.time())
+	st.write('Start time:',st.session_date_time.date(),st.session_date_time.time())
 # 	st.snow()
 
 
