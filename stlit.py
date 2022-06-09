@@ -21,10 +21,10 @@ from pathlib import Path
 import tempfile
 
 
-file = st.file_uploader("选择待上传的csv文件", type=['csv'])
+file = st.file_uploader("选择待上传的xlsx文件", type=['xlsx'])
 if st.button("点击"):
     if file is not None:
-        data = pd.read_csv(file.read())
+        data = pd.read_excel(file.read())
         st.dataframe(data)
         
 
