@@ -15,13 +15,13 @@ from scipy.fftpack import dct
 from scipy.fft import fft
 
 st.set_page_config(page_title="七里香还是稻香",page_icon=":rainbow:",layout="wide",initial_sidebar_state="auto")
-    st.title('七里香还是稻香:heart:')
-    st.markdown('<br>',unsafe_allow_html=True)
-    st.markdown('<br>',unsafe_allow_html=True)
-    charts_mapping={
-        'Line':'line_chart','Bar':'bar_chart','Area':'area_chart','Hist':'pyplot','Altair':'altair_chart',
-        'Map':'map','Distplot':'plotly_chart','Pdk':'pydeck_chart','Graphviz':'graphviz_chart','PyEchart':''
-    }
+st.title('七里香还是稻香:heart:')
+st.markdown('<br>',unsafe_allow_html=True)
+st.markdown('<br>',unsafe_allow_html=True)
+charts_mapping={
+'Line':'line_chart','Bar':'bar_chart','Area':'area_chart','Hist':'pyplot','Altair':'altair_chart',
+'Map':'map','Distplot':'plotly_chart','Pdk':'pydeck_chart','Graphviz':'graphviz_chart','PyEchart':''}
+
 if 'first_visit' not in st.session_state:
     st.session_state.first_visit=True
 else:
