@@ -18,9 +18,7 @@ st.set_page_config(page_title="言语语音可视化平台",page_icon=":rainbow:
 st.title('言语语音可视化平台:heart:')
 st.markdown('<br>',unsafe_allow_html=True)
 st.markdown('<br>',unsafe_allow_html=True)
-charts_mapping={
-'Line':'line_chart','Bar':'bar_chart','Area':'area_chart','Hist':'pyplot','Altair':'altair_chart',
-'Map':'map','Distplot':'plotly_chart','Pdk':'pydeck_chart','Graphviz':'graphviz_chart','PyEchart':''}
+
 
 if 'first_visit' not in st.session_state:
     st.session_state.first_visit=True
@@ -35,12 +33,14 @@ if st.session_state.first_visit:
 
 
 
-
 uploaded_file = st.file_uploader("选择待上传的xlsx文件", accept_multiple_files = False, type=["xlsx","xls"])
 if st.button("点击"):
     if uploaded_file is not None:
         df = pd.read_excel(uploaded_file.read())
         st.dataframe(df)
+	
+img = st.file_uploader("选择待上传的图片", accept_multiple_files = False, type=["gif"])
+streamlit.image(img, caption=None, width=None, use_column_width=False, clamp=False)
         
 
 
