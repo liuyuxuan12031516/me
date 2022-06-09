@@ -6,4 +6,3 @@ scipy
 openpyxl
 librosa
 SoundFile
-sndfile
