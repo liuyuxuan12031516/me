@@ -14,7 +14,6 @@ import scipy.io.wavfile
 from matplotlib import pyplot as plt
 from scipy.fftpack import dct
 from scipy.fft import fft
-import seaborn as sns
 
 st.set_page_config(page_title="言语语音可视化平台", page_icon=":rainbow:", layout="wide", initial_sidebar_state="auto")
 st.title('言语语音可视化平台:heart:')
