@@ -1,4 +1,4 @@
-# import librosa
+import librosa
 import streamlit as st
 import pandas as pd
 import numpy as np
@@ -14,6 +14,7 @@ import scipy.io.wavfile
 from matplotlib import pyplot as plt
 from scipy.fftpack import dct
 from scipy.fft import fft
+import seaborn as sns
 
 st.set_page_config(page_title="言语语音可视化平台", page_icon=":rainbow:", layout="wide", initial_sidebar_state="auto")
 st.title('言语语音可视化平台:heart:')
@@ -44,6 +45,9 @@ if uploaded_file is not None:
         st.write(uploaded_file.type)
         sample_rate, signal = scipy.io.wavfile.read(uploaded_file)
 
+        audio_file = uploaded_file
+        audio_bytes = audio_file.read()
+        st.audio(audio_bytes, format='audio/ogg')
 
         'file:', uploaded_file
         option2 = st.selectbox(
@@ -94,28 +98,60 @@ if uploaded_file is not None:
             plt.title('Spectrogram')
             st.pyplot(fig3)
 
-            # fftdata = np.fft.fft(waveData[0, :])
-            # fftdata = abs(fftdata)
-            # hz_axis = np.arange(0, len(fftdata))
-            # plt.figure()
-            # plt.plot(hz_axis, fftdata, c='b')
-            # plt.xlabel('hz')
-            # plt.ylabel('am')
-            # plt.show()
-
-
-
-
     else:
         df = pd.read_excel(uploaded_file.read())
-        st.dataframe(df)
+        st.dataframe(df.head())
+        option3 = st.multiselect(
+            'Variable',
+            ['f0','f1','f2','f3'])
+        # st.write(option3)
 
-# uploaded_file1 = st.file_uploader("Choose a WAV file", type="wav")
-# uploaded_file2 = st.file_uploader("Choose a WAV file", type="wav")
+        times = [13, 25, 38, 50, 62, 75, 88]
+        time_dict = {}
+        s = 0
+        for i in times:
+            time_dict[i] = s
+            s += 1
+        # st.write(time_dict)
 
-# if uploaded_file1 is not None:
-#     sample_rate,signal=scipy.io.wavfile.read(uploaded_file)
+        if len(option3) >= 1:
+            col1,col2,col3 = st.columns((1,1,4))
 
-# # file = st.sidebar.selectbox(
-# #         'file',
-# #         ['D:/桌面/CGZ-speaker1-a-T1.wav','D:/桌面/ZQ-speaker1-a-T4.wav'])
+            time0 = col1.checkbox('13')
+            time1 = col1.checkbox('25')
+            time2 = col1.checkbox('38')
+            time3 = col1.checkbox('50')
+            time4 = col1.checkbox('62')
+            time5 = col1.checkbox('75')
+            time6 = col1.checkbox('88')
+            time = [time0,time1,time2,time3,time4,time5,time6]
+
+            for i in option3:
+                columns = [j for j in df.columns.values if i in j]
+
+            col_list = []
+            for i in range(7):
+                if time[i]:
+                    col_list.append(columns[time_dict[times[i]]])
+
+
+            s = col2.multiselect('group:',['vowel','region','sex','age'])
+            if len(s) != 0:
+
+                col2.write(s)
+                grouplist = [i for i in s]
+                dff = df.groupby(by=grouplist).mean()
+                dff = dff.loc[:,col_list]
+
+                col3.dataframe(dff)
+
+                fig = plt.figure(figsize=(18,8))
+                for i in range(len(dff)):
+                    plt.plot(dff.loc[dff.index[i]], label=dff.index[i])
+                plt.legend(loc="upper right")
+                plt.show()
+                st.pyplot(fig)
+
+
+
+
