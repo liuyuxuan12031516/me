@@ -1,31 +1,20 @@
-import streamlit as st
-import pandas as pd
-import numpy as np
-from PIL import Image
 import datetime
-import random
-from python_speech_features import mfcc
+import time
 import matplotlib.pyplot as plt
 import numpy as np
-from matplotlib import cm
-import numpy
-import scipy.io.wavfile
-from matplotlib import pyplot as plt
-from scipy.fftpack import dct
-from scipy.fft import fft
-import datetime
-from sklearn import neighbors
 import pandas as pd
+import scipy.io.wavfile
 import streamlit as st
+from matplotlib import cm
+from python_speech_features import mfcc
+from scipy.fft import fft
+from sklearn import neighbors
+from sklearn import svm
+from sklearn.ensemble import RandomForestClassifier
+from sklearn.linear_model import LogisticRegression
+from sklearn.naive_bayes import GaussianNB
 from sklearn.preprocessing import LabelEncoder
 from sklearn.tree import DecisionTreeClassifier
-from sklearn.ensemble import RandomForestClassifier
-from sklearn.naive_bayes import GaussianNB
-from sklearn import svm
-from sklearn.linear_model import LogisticRegression
-import time
-import numpy as np
-import matplotlib.pyplot as plt
 
 class_le = LabelEncoder()
 knn = neighbors.KNeighborsClassifier()
