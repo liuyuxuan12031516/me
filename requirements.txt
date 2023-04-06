@@ -6,6 +6,5 @@ scipy
 openpyxl
 librosa
 SoundFile
-time
 datetime
 sklearn
